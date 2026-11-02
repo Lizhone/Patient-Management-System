@@ -82,6 +82,6 @@ Developed as a full-stack web application using Angular, Python Flask, and Micro
 
 ---
 ##Author
-Lizhone Remeh
+**Lizhone Remeh**
 
 **Gentle Care – Simplifying Patient and Hospital Record Management.**
