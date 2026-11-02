@@ -81,7 +81,7 @@ The goal of Gentle Care is to improve the efficiency of hospital administrative 
 Developed as a full-stack web application using Angular, Python Flask, and Microsoft SQL Server.
 
 ---
-##Author
+## Author
 **Lizhone Remeh**
 
 **Gentle Care – Simplifying Patient and Hospital Record Management.**
