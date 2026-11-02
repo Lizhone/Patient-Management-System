@@ -1,0 +1,209 @@
+
+<div class="edit-patient-page">
+
+  <!-- Header -->
+  <header class="page-header">
+    <div class="brand">
+      <img src="images/gentle-care-logo.png" alt="Gentle Care Logo">
+      <div>
+        <h2>Gentle Care</h2>
+        <span>Patient Management System</span>
+      </div>
+    </div>
+
+    <button class="back-button" (click)="cancelEdit()">
+      ← Back to Patient List
+    </button>
+  </header>
+
+  <!-- Main Content -->
+  <main class="edit-content">
+
+    <section class="page-heading">
+      <div>
+        <p class="page-label">PATIENT MANAGEMENT</p>
+        <h1>Edit Patient</h1>
+        <p>Update the registered patient's information.</p>
+      </div>
+
+      <span class="patient-id" *ngIf="patient">
+        Patient ID: #{{ patient.patientId }}
+      </span>
+    </section>
+
+    <!-- Loading -->
+    <div class="message-card" *ngIf="isLoading">
+      Loading patient information...
+    </div>
+
+    <!-- Error -->
+    <div class="error-message" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
+
+    <!-- Edit Form -->
+    <form
+      class="edit-form"
+      *ngIf="!isLoading && patient"
+      (ngSubmit)="saveChanges()">
+
+      <!-- Personal Information -->
+      <section class="form-section">
+        <h2>Personal Information</h2>
+        <p>Update the patient's basic information.</p>
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label>Full Name *</label>
+            <input
+              type="text"
+              name="fullName"
+              [(ngModel)]="patient.fullName"
+              required>
+          </div>
+
+          <div class="form-group">
+            <label>Date of Birth *</label>
+            <input
+              type="date"
+              name="dateOfBirth"
+              [(ngModel)]="patient.dateOfBirth"
+              required>
+          </div>
+
+          <div class="form-group">
+            <label>Gender *</label>
+            <select
+              name="gender"
+              [(ngModel)]="patient.gender"
+              required>
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Blood Group</label>
+            <select
+              name="bloodGroup"
+              [(ngModel)]="patient.bloodGroup">
+              <option [ngValue]="null">Select Blood Group</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+            </select>
+          </div>
+
+        </div>
+      </section>
+
+      <div class="form-divider"></div>
+
+      <!-- Contact Information -->
+      <section class="form-section">
+        <h2>Contact Information</h2>
+        <p>Update the patient's contact details.</p>
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label>Phone Number *</label>
+            <input
+              type="tel"
+              name="phone"
+              [(ngModel)]="patient.phone"
+              required>
+          </div>
+
+          <div class="form-group">
+            <label>Email Address</label>
+            <input
+              type="email"
+              name="email"
+              [(ngModel)]="patient.email">
+          </div>
+
+          <div class="form-group">
+            <label>City *</label>
+            <input
+              type="text"
+              name="city"
+              [(ngModel)]="patient.city"
+              required>
+          </div>
+
+          <div class="form-group">
+            <label>Emergency Contact</label>
+            <input
+              type="tel"
+              name="emergencyContact"
+              [(ngModel)]="patient.emergencyContact">
+          </div>
+
+          <div class="form-group full-width">
+            <label>Address *</label>
+            <textarea
+              name="address"
+              rows="3"
+              [(ngModel)]="patient.address"
+              required></textarea>
+          </div>
+
+        </div>
+      </section>
+
+      <div class="form-divider"></div>
+
+      <!-- Medical Information -->
+      <section class="form-section">
+        <h2>Medical Information</h2>
+        <p>Update the patient's medical history.</p>
+
+        <div class="form-group">
+          <label>Medical History</label>
+          <textarea
+            name="medicalHistory"
+            rows="4"
+            [(ngModel)]="patient.medicalHistory"
+            placeholder="Enter medical history..."></textarea>
+        </div>
+      </section>
+
+      <!-- Form Actions -->
+      <div class="form-actions">
+
+        <button
+          type="button"
+          class="cancel-button"
+          [disabled]="isSaving"
+          (click)="cancelEdit()">
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          class="save-button"
+          [disabled]="isSaving">
+          {{ isSaving ? 'Saving Changes...' : 'Save Changes' }}
+        </button>
+
+      </div>
+
+    </form>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="page-footer">
+    <p>© 2026 Gentle Care. Patient Management System.</p>
+  </footer>
+
+</div>

@@ -1,0 +1,188 @@
+
+<div class="dashboard-page">
+
+  <!-- Header -->
+  <header class="dashboard-header">
+    <div class="brand">
+      <img src="images/gentle-care-logo.png" alt="Gentle Care Logo">
+      <div>
+        <h2>Gentle Care</h2>
+        <span>Patient Management System</span>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <div class="staff-info">
+        <span class="staff-name">{{ staffName }}</span>
+        <span class="staff-role">{{ staffRole }}</span>
+      </div>
+
+      <button class="logout-button" (click)="logout()">
+        Logout
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="dashboard-content">
+
+    <!-- Welcome Section -->
+    <section class="welcome-section">
+      <div>
+        <p class="welcome-label">WELCOME BACK</p>
+        <h1>Hello, {{ staffName }}!</h1>
+        <p>Manage patient information and hospital records from one place.</p>
+      </div>
+    </section>
+
+    <!-- Dashboard Statistics -->
+    <section class="statistics-section">
+      <h2>Dashboard Overview</h2>
+
+      <div class="statistics-grid">
+
+        <!-- Total Patients -->
+        <div class="stat-card">
+          <div class="stat-icon">♙</div>
+          <div>
+            <p>Total Patients</p>
+            <h3>{{ isLoading ? '...' : totalPatients }}</h3>
+          </div>
+        </div>
+
+        <!-- New Patients -->
+        <div class="stat-card">
+          <div class="stat-icon">✚</div>
+          <div>
+            <p>New Patients</p>
+            <h3>{{ isLoading ? '...' : newPatients }}</h3>
+          </div>
+        </div>
+
+        <!-- Total Bills -->
+        <div class="stat-card">
+          <div class="stat-icon">▤</div>
+          <div>
+            <p>Total Bills</p>
+            <h3>{{ isLoading ? '...' : totalBills }}</h3>
+          </div>
+        </div>
+
+        <!-- Active Records -->
+        <div class="stat-card">
+          <div class="stat-icon">✓</div>
+          <div>
+            <p>Active Records</p>
+            <h3>{{ isLoading ? '...' : activeRecords }}</h3>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Quick Actions -->
+    <section class="quick-actions-section">
+      <h2>Patient Management</h2>
+
+      <p class="section-description">
+        Choose an action to manage hospital patient records.
+      </p>
+
+      <div class="actions-grid">
+
+        <!-- Add Patient -->
+        <a href="/add-patient" class="action-card">
+          <span class="action-icon">＋</span>
+          <h3>Add Patient</h3>
+          <p>Register a new patient in the system.</p>
+          <span class="action-link">Get Started →</span>
+        </a>
+
+        <!-- Patient List -->
+        <a href="/patients" class="action-card">
+          <span class="action-icon">☷</span>
+          <h3>Patient List</h3>
+          <p>View and manage existing patient records.</p>
+          <span class="action-link">View Patients →</span>
+        </a>
+
+        <!-- Patient Billing -->
+        <a href="/billing" class="action-card">
+          <span class="action-icon">₹</span>
+          <h3>Patient Billing</h3>
+          <p>Manage patient bills and payment records.</p>
+          <span class="action-link">Manage Bills →</span>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- New Patients List -->
+    <section class="new-patients-section">
+
+      <div class="section-heading">
+        <div>
+          <h2>New Patients</h2>
+          <p class="section-description">
+            Patient records waiting for staff review.
+          </p>
+        </div>
+
+        <a href="/patients" class="view-all-link">
+          View All →
+        </a>
+      </div>
+
+      <div class="new-patients-card">
+
+        <!-- Loading -->
+        <p *ngIf="isLoading" class="empty-message">
+          Loading patient records...
+        </p>
+
+        <!-- No New Patients -->
+        <p
+          *ngIf="!isLoading && newPatientList.length === 0"
+          class="empty-message">
+          No new patients waiting for review.
+        </p>
+
+        <!-- Patient Records -->
+        <div
+          class="new-patient-row"
+          *ngFor="let patient of newPatientList">
+
+          <div class="patient-avatar">
+            {{ patient.fullName.charAt(0).toUpperCase() }}
+          </div>
+
+          <div class="patient-details">
+            <h3>{{ patient.fullName }}</h3>
+            <p>Patient ID: {{ patient.patientId }}</p>
+          </div>
+
+          <div class="patient-contact">
+            <span>{{ patient.phone }}</span>
+            <small>Awaiting review</small>
+          </div>
+
+          <button
+            type="button"
+            class="review-button"
+            (click)="viewPatient(patient.patientId)">
+            View Record
+          </button>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="dashboard-footer">
+    <p>© 2026 Gentle Care. Patient Management System.</p>
+  </footer>
+
+</div>

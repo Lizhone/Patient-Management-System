@@ -1,0 +1,230 @@
+
+<div class="patient-list-page">
+
+  <!-- Header -->
+  <header class="page-header">
+    <div class="brand">
+      <img src="images/gentle-care-logo.png" alt="Gentle Care Logo">
+      <div>
+        <h2>Gentle Care</h2>
+        <span>Patient Management System</span>
+      </div>
+    </div>
+
+    <button class="back-button" (click)="goBack()">
+      ← Back to Dashboard
+    </button>
+  </header>
+
+  <!-- Main Content -->
+  <main class="patient-content">
+
+    <!-- Page Heading -->
+    <section class="page-title">
+      <div>
+        <p class="page-label">PATIENT MANAGEMENT</p>
+        <h1>Patient Records</h1>
+        <p>View and manage registered hospital patients.</p>
+      </div>
+
+      <div class="patient-count">
+        <span>Total Patients</span>
+        <h2>{{ patients.length }}</h2>
+      </div>
+    </section>
+
+    <!-- Patient Table Card -->
+    <section class="patient-table-section">
+
+      <div class="table-heading">
+        <div>
+          <h2>All Patients</h2>
+          <p>Registered patient information</p>
+        </div>
+      </div>
+
+      <!-- Search and Filters -->
+      <div class="filter-section" *ngIf="!isLoading && !errorMessage">
+
+        <div class="search-box">
+          <label for="patientSearch">Search Patients</label>
+          <input
+            id="patientSearch"
+            type="text"
+            placeholder="Search by name, ID or phone number..."
+            [(ngModel)]="searchText">
+        </div>
+
+        <div class="filter-group">
+          <label for="genderFilter">Gender</label>
+          <select
+            id="genderFilter"
+            [(ngModel)]="selectedGender">
+            <option value="All">All Genders</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="statusFilter">Record Status</label>
+          <select
+            id="statusFilter"
+            [(ngModel)]="selectedStatus">
+            <option value="All">All Status</option>
+            <option value="New">New</option>
+            <option value="Viewed">Viewed</option>
+          </select>
+        </div>
+
+        <button
+          type="button"
+          class="clear-filter-button"
+          (click)="clearFilters()">
+          Clear Filters
+        </button>
+
+      </div>
+
+      <!-- Result Count -->
+      <div
+        class="filter-result-count"
+        *ngIf="!isLoading && !errorMessage && patients.length > 0">
+        Showing {{ filteredPatients.length }} of {{ patients.length }} patients
+      </div>
+
+      <!-- Loading -->
+      <div class="message-container" *ngIf="isLoading">
+        Loading patient records...
+      </div>
+
+      <!-- Error -->
+      <div
+        class="message-container error-message"
+        *ngIf="!isLoading && errorMessage">
+        {{ errorMessage }}
+        <button class="retry-button" (click)="loadPatients()">
+          Try Again
+        </button>
+      </div>
+
+      <!-- No Patients -->
+      <div
+        class="message-container"
+        *ngIf="!isLoading && !errorMessage && patients.length === 0">
+        <div class="empty-icon">♙</div>
+        <h3>No Patients Found</h3>
+        <p>There are currently no registered patients.</p>
+      </div>
+
+      <!-- No Matching Results -->
+      <div
+        class="message-container"
+        *ngIf="!isLoading && !errorMessage &&
+               patients.length > 0 && filteredPatients.length === 0">
+        <div class="empty-icon">⌕</div>
+        <h3>No Matching Patients</h3>
+        <p>Try changing your search or filter options.</p>
+        <button
+          class="clear-filter-button"
+          (click)="clearFilters()">
+          Clear Filters
+        </button>
+      </div>
+
+      <!-- Patient Table -->
+      <div
+        class="table-responsive"
+        *ngIf="!isLoading && !errorMessage && filteredPatients.length > 0">
+
+        <table class="patient-table">
+          <thead>
+            <tr>
+              <th>Patient ID</th>
+              <th>Patient Name</th>
+              <th>Date of Birth</th>
+              <th>Gender</th>
+              <th>Phone Number</th>
+              <th>City</th>
+              <th>Registration Date</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let patient of filteredPatients">
+
+              <td class="patient-id">
+                #{{ patient.patientId }}
+              </td>
+
+              <td class="patient-name">
+                {{ patient.fullName }}
+              </td>
+
+              <td>
+                {{ patient.dateOfBirth | date:'dd MMM yyyy' }}
+              </td>
+
+              <td>{{ patient.gender }}</td>
+
+              <td>{{ patient.phone }}</td>
+
+              <td>{{ patient.city }}</td>
+
+              <td>
+                {{ patient.createdAt | date:'dd MMM yyyy' }}
+              </td>
+
+              <td>
+                <span
+                  class="status-badge"
+                  [class.new-status]="!patient.isViewed"
+                  [class.viewed-status]="patient.isViewed">
+                  {{ patient.isViewed ? 'Viewed' : 'New' }}
+                </span>
+              </td>
+
+             <td class="action-buttons">
+
+  <button
+    type="button"
+    class="view-button"
+    (click)="viewPatient(patient.patientId)">
+    View
+  </button>
+
+  <button
+    type="button"
+    class="edit-button"
+    (click)="editPatient(patient.patientId)">
+    Edit
+  </button>
+
+  <button
+    type="button"
+    class="delete-button"
+    (click)="deletePatient(patient.patientId)">
+    Delete
+  </button>
+
+</td>
+
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="page-footer">
+    <p>© 2026 Gentle Care. Patient Management System.</p>
+  </footer>
+
+</div>

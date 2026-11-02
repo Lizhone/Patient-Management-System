@@ -1,0 +1,303 @@
+
+/* =====================================
+   GENTLE CARE - PATIENT DETAILS
+===================================== */
+
+:host {
+  display: block;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  color: #294638;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.patient-details-page {
+  min-height: 100vh;
+  background: #F3F8F4;
+  display: flex;
+  flex-direction: column;
+}
+
+/* HEADER */
+
+.page-header {
+  min-height: 85px;
+  background: #FFFFFF;
+  border-bottom: 1px solid #DCE7DE;
+  padding: 12px 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand img {
+  width: 55px;
+  height: 55px;
+  object-fit: contain;
+}
+
+.brand h2 {
+  margin: 0;
+  font-family: 'Brush Script MT', cursive;
+  font-size: 30px;
+  color: #315B46;
+}
+
+.brand span {
+  display: block;
+  margin-top: 2px;
+  font-size: 11px;
+  color: #718477;
+}
+
+.back-button,
+.back-action {
+  background: #E8F2EA;
+  color: #315B46;
+  border: 1px solid #DCE7DE;
+  border-radius: 7px;
+  padding: 11px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.back-button:hover,
+.back-action:hover {
+  background: #315B46;
+  color: #FFFFFF;
+}
+
+/* MAIN CONTENT */
+
+.details-content {
+  width: 90%;
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 40px 0 55px;
+  flex: 1;
+}
+
+/* PAGE HEADING */
+
+.page-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.page-label {
+  color: #527D68;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin: 0 0 9px;
+}
+
+.page-heading h1 {
+  color: #315B46;
+  font-size: 28px;
+  margin: 0 0 8px;
+}
+
+.page-heading p:last-child {
+  color: #718477;
+  font-size: 13px;
+  margin: 0;
+}
+
+.record-status {
+  background: #E8F2EA;
+  color: #3F805B;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* DETAILS CARD */
+
+.details-card {
+  background: #FFFFFF;
+  border: 1px solid #DCE7DE;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 3px 15px rgba(49, 91, 70, 0.06);
+}
+
+/* PATIENT PROFILE */
+
+.patient-profile {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  padding-bottom: 25px;
+}
+
+.patient-avatar {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background: #E8F2EA;
+  color: #315B46;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.patient-profile h2 {
+  color: #315B46;
+  font-size: 21px;
+  margin: 0 0 6px;
+}
+
+.patient-profile p {
+  color: #718477;
+  font-size: 12px;
+  margin: 0;
+}
+
+/* DIVIDERS */
+
+.details-divider {
+  height: 1px;
+  background: #E8F0E9;
+  margin: 22px 0;
+}
+
+/* DETAIL SECTIONS */
+
+.detail-section h3 {
+  color: #315B46;
+  font-size: 17px;
+  margin: 0 0 22px;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px 35px;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.detail-item span {
+  color: #718477;
+  font-size: 12px;
+}
+
+.detail-item strong {
+  color: #294638;
+  font-size: 14px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+/* ACTIONS */
+
+.details-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 30px;
+}
+
+.message-card {
+  background: #FFFFFF;
+  border: 1px solid #DCE7DE;
+  border-radius: 10px;
+  padding: 35px;
+  text-align: center;
+  color: #718477;
+  font-size: 14px;
+}
+
+.error-message {
+  color: #C75B5B;
+}
+
+/* FOOTER */
+
+.page-footer {
+  background: #FFFFFF;
+  border-top: 1px solid #DCE7DE;
+  padding: 18px 5%;
+  text-align: center;
+}
+
+.page-footer p {
+  margin: 0;
+  color: #718477;
+  font-size: 12px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 650px) {
+  .page-header {
+    padding: 12px 4%;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  .brand img {
+    width: 43px;
+    height: 43px;
+  }
+
+  .brand h2 {
+    font-size: 25px;
+  }
+
+  .details-content {
+    width: 92%;
+    padding-top: 25px;
+  }
+
+  .page-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .details-card {
+    padding: 22px 18px;
+  }
+
+  .details-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .full-width {
+    grid-column: auto;
+  }
+
+  .details-actions {
+    justify-content: stretch;
+  }
+
+  .back-action {
+    width: 100%;
+  }
+}

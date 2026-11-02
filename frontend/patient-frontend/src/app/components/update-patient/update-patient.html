@@ -1,0 +1,163 @@
+
+<div class="patient-details-page">
+
+  <!-- Header -->
+  <header class="page-header">
+    <div class="brand">
+      <img src="images/gentle-care-logo.png" alt="Gentle Care Logo">
+      <div>
+        <h2>Gentle Care</h2>
+        <span>Patient Management System</span>
+      </div>
+    </div>
+
+    <button class="back-button" (click)="goBack()">
+      ← Back to Patient List
+    </button>
+  </header>
+
+  <!-- Main Content -->
+  <main class="details-content">
+
+    <div class="page-heading">
+      <div>
+        <p class="page-label">PATIENT MANAGEMENT</p>
+        <h1>Patient Details</h1>
+        <p>View the complete information of the selected patient.</p>
+      </div>
+
+      <span class="record-status" *ngIf="patient">
+        {{ patient.isViewed ? 'Viewed' : 'New Patient' }}
+      </span>
+    </div>
+
+    <!-- Loading -->
+    <div class="message-card" *ngIf="isLoading">
+      Loading patient information...
+    </div>
+
+    <!-- Error -->
+    <div class="message-card error-message" *ngIf="!isLoading && errorMessage">
+      {{ errorMessage }}
+    </div>
+
+    <!-- Patient Details -->
+    <section class="details-card" *ngIf="!isLoading && patient">
+
+      <div class="patient-profile">
+        <div class="patient-avatar">
+          {{ patient.fullName.charAt(0).toUpperCase() }}
+        </div>
+
+        <div>
+          <h2>{{ patient.fullName }}</h2>
+          <p>Patient ID: #{{ patient.patientId }}</p>
+        </div>
+      </div>
+
+      <div class="details-divider"></div>
+
+      <!-- Personal Information -->
+      <section class="detail-section">
+        <h3>Personal Information</h3>
+
+        <div class="details-grid">
+          <div class="detail-item">
+            <span>Full Name</span>
+            <strong>{{ patient.fullName }}</strong>
+          </div>
+
+          <div class="detail-item">
+            <span>Date of Birth</span>
+            <strong>{{ patient.dateOfBirth | date:'dd MMM yyyy' }}</strong>
+          </div>
+
+          <div class="detail-item">
+            <span>Gender</span>
+            <strong>{{ patient.gender }}</strong>
+          </div>
+
+          <div class="detail-item">
+            <span>Blood Group</span>
+            <strong>{{ patient.bloodGroup || 'Not provided' }}</strong>
+          </div>
+        </div>
+      </section>
+
+      <div class="details-divider"></div>
+
+      <!-- Contact Information -->
+      <section class="detail-section">
+        <h3>Contact Information</h3>
+
+        <div class="details-grid">
+          <div class="detail-item">
+            <span>Phone Number</span>
+            <strong>{{ patient.phone }}</strong>
+          </div>
+
+          <div class="detail-item">
+            <span>Email Address</span>
+            <strong>{{ patient.email || 'Not provided' }}</strong>
+          </div>
+
+          <div class="detail-item">
+            <span>City</span>
+            <strong>{{ patient.city }}</strong>
+          </div>
+
+          <div class="detail-item">
+            <span>Emergency Contact</span>
+            <strong>{{ patient.emergencyContact || 'Not provided' }}</strong>
+          </div>
+
+          <div class="detail-item full-width">
+            <span>Address</span>
+            <strong>{{ patient.address }}</strong>
+          </div>
+        </div>
+      </section>
+
+      <div class="details-divider"></div>
+
+      <!-- Medical Information -->
+      <section class="detail-section">
+        <h3>Medical Information</h3>
+
+        <div class="detail-item full-width">
+          <span>Medical History</span>
+          <strong>{{ patient.medicalHistory || 'No medical history provided' }}</strong>
+        </div>
+      </section>
+
+      <div class="details-divider"></div>
+
+      <!-- Registration Information -->
+      <section class="detail-section">
+        <h3>Registration Information</h3>
+
+        <div class="details-grid">
+          <div class="detail-item">
+            <span>Registration Date</span>
+            <strong>{{ patient.createdAt | date:'dd MMM yyyy' }}</strong>
+          </div>
+        </div>
+      </section>
+
+      <!-- Actions -->
+      <div class="details-actions">
+        <button class="back-action" (click)="goBack()">
+          Back to Patient List
+        </button>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="page-footer">
+    <p>© 2026 Gentle Care. Patient Management System.</p>
+  </footer>
+
+</div>

@@ -1,0 +1,282 @@
+
+<div class="billing-page">
+
+  <!-- Header -->
+  
+<header class="page-header">
+  <div class="brand">
+    <img
+      src="/images/gentle-care-logo.png"
+      alt="Gentle Care Logo"
+      class="brand-logo"
+    >
+
+    <div class="brand-text">
+      <h2>Gentle Care</h2>
+      <span>Patient Management System</span>
+    </div>
+  </div>
+  <button
+  type="button"
+  class="back-button"
+  (click)="goToDashboard()">
+  ← Back to Dashboard
+</button>
+</header>
+
+
+  <main class="billing-container">
+
+    <div class="page-heading">
+      <div>
+        <p class="eyebrow">FINANCIAL MANAGEMENT</p>
+        <h1>Patient Billing</h1>
+        <p class="subtitle">
+          Create bills, manage payments and review billing history.
+        </p>
+      </div>
+    </div>
+
+    <!-- Summary Cards -->
+    <section class="summary-grid">
+
+      <div class="summary-card">
+        <div class="summary-icon bills-icon">▤</div>
+        <div>
+          <p>Total Bills</p>
+          <h2>{{ totalBills }}</h2>
+          <span>All generated bills</span>
+        </div>
+      </div>
+
+      <div class="summary-card">
+        <div class="summary-icon revenue-icon">₹</div>
+        <div>
+          <p>Paid Revenue</p>
+          <h2>₹{{ totalRevenue | number:'1.2-2' }}</h2>
+          <span>{{ paidBills }} paid bills</span>
+        </div>
+      </div>
+
+      <div class="summary-card">
+        <div class="summary-icon pending-icon">◷</div>
+        <div>
+          <p>Pending Amount</p>
+          <h2>₹{{ pendingAmount | number:'1.2-2' }}</h2>
+          <span>Awaiting payment</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Messages -->
+    <div class="alert success-alert" *ngIf="successMessage">
+      {{ successMessage }}
+    </div>
+
+    <div class="alert error-alert" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
+
+    <!-- Create Bill -->
+    <section class="content-card">
+
+      <div class="section-heading">
+        <div>
+          <h2>Create New Bill</h2>
+          <p>Enter patient and billing information below.</p>
+        </div>
+        <span class="section-tag">NEW BILL</span>
+      </div>
+
+      <form (ngSubmit)="createBill()" #billForm="ngForm">
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label for="patient">Select Patient <span>*</span></label>
+
+            <select
+              id="patient"
+              name="patient"
+              [(ngModel)]="selectedPatientId"
+              required>
+
+              <option [ngValue]="null" disabled>
+                Choose a patient
+              </option>
+
+              <option
+                *ngFor="let patient of patients"
+                [ngValue]="patient.patientId">
+
+                {{ patient.fullName }} (ID: {{ patient.patientId }})
+              </option>
+
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="amount">Bill Amount (₹) <span>*</span></label>
+
+            <input
+              type="number"
+              id="amount"
+              name="amount"
+              [(ngModel)]="amount"
+              min="0.01"
+              step="0.01"
+              placeholder="Enter amount"
+              required>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="description">Service Description <span>*</span></label>
+
+            <textarea
+              id="description"
+              name="description"
+              [(ngModel)]="description"
+              rows="3"
+              placeholder="Enter consultation, treatment or service details"
+              required>
+            </textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="paymentStatus">Payment Status</label>
+
+            <select
+              id="paymentStatus"
+              name="paymentStatus"
+              [(ngModel)]="paymentStatus">
+
+              <option value="Pending">Pending</option>
+              <option value="Paid">Paid</option>
+              <option value="Partially Paid">Partially Paid</option>
+
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="paymentMethod">Payment Method</label>
+
+            <select
+              id="paymentMethod"
+              name="paymentMethod"
+              [(ngModel)]="paymentMethod">
+
+              <option value="Cash">Cash</option>
+              <option value="UPI">UPI</option>
+              <option value="Card">Card</option>
+              <option value="Bank Transfer">Bank Transfer</option>
+
+            </select>
+          </div>
+
+        </div>
+
+        <div class="form-actions">
+          <button
+            type="submit"
+            class="create-button"
+            [disabled]="isSaving || billForm.invalid">
+
+            {{ isSaving ? 'Creating Bill...' : 'Create Bill' }}
+          </button>
+        </div>
+
+      </form>
+
+    </section>
+
+    <!-- Billing History -->
+    <section class="content-card history-card">
+
+      <div class="section-heading">
+        <div>
+          <h2>Billing History</h2>
+          <p>View and manage previously generated bills.</p>
+        </div>
+
+        <span class="record-count">
+          {{ totalBills }} Records
+        </span>
+      </div>
+
+      <div class="loading-state" *ngIf="isLoading">
+        Loading billing records...
+      </div>
+
+      <div class="empty-state" *ngIf="!isLoading && bills.length === 0">
+        <div class="empty-icon">▤</div>
+        <h3>No Bills Available</h3>
+        <p>Created bills will appear here.</p>
+      </div>
+
+      <div class="table-wrapper" *ngIf="!isLoading && bills.length > 0">
+
+        <table>
+          <thead>
+            <tr>
+              <th>Bill ID</th>
+              <th>Patient</th>
+              <th>Description</th>
+              <th>Date</th>
+              <th>Amount</th>
+              <th>Payment Method</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let bill of bills">
+
+              <td class="bill-id">
+                #{{ bill.billId }}
+              </td>
+
+              <td>
+                <strong>{{ bill.patientName }}</strong>
+                <small>Patient ID: {{ bill.patientId }}</small>
+              </td>
+
+              <td>{{ bill.description }}</td>
+
+              <td>{{ bill.billDate | date:'dd MMM yyyy' }}</td>
+
+              <td class="amount-cell">
+                ₹{{ bill.amount | number:'1.2-2' }}
+              </td>
+
+              <td>{{ bill.paymentMethod || 'Not specified' }}</td>
+
+              <td>
+                <select
+                  class="status-select"
+                  [ngModel]="bill.paymentStatus"
+                  [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="updatePaymentStatus(bill, $event)">
+
+                  <option value="Paid">Paid</option>
+                  <option value="Pending">Pending</option>
+                  <option value="Partially Paid">Partially Paid</option>
+
+                </select>
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer class="page-footer">
+    © 2026 Gentle Care. All rights reserved.
+  </footer>
+
+</div>

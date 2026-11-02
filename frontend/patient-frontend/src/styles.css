@@ -1,0 +1,92 @@
+
+/* =====================================
+   PATIENT MANAGEMENT SYSTEM
+   GLOBAL THEME - SAGE GREEN & WHITE
+===================================== */
+
+:root {
+  --primary-green: #527D68;
+  --primary-dark: #315B46;
+  --sage-green: #DDEBE1;
+  --pale-green: #E8F2EA;
+
+  --background-color: #F3F8F4;
+  --surface-color: #FFFFFF;
+
+  --text-primary: #294638;
+  --text-secondary: #718477;
+
+  --border-color: #DCE7DE;
+
+  --success-color: #3F805B;
+  --warning-color: #D6A64B;
+  --danger-color: #C75B5B;
+
+  --card-shadow: 0 3px 15px rgba(49, 91, 70, 0.06);
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+}
+
+/* Global Reset */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  min-height: 100%;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: var(--background-color);
+  color: var(--text-primary);
+}
+
+/* Buttons */
+
+button {
+  background: var(--primary-green);
+  color: #FFFFFF;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 11px 20px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+button:hover {
+  background: var(--primary-dark);
+}
+
+/* Form Elements */
+
+input, select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--surface-color);
+  color: var(--text-primary);
+  font: inherit;
+  outline: none;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--primary-green);
+  box-shadow: 0 0 0 3px rgba(82, 125, 104, 0.12);
+}
+
+/* Cards */
+
+.card {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--card-shadow);
+  padding: 20px;
+}

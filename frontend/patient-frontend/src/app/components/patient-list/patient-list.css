@@ -1,0 +1,509 @@
+
+/* =====================================
+   GENTLE CARE - PATIENT LIST
+===================================== */
+
+:host {
+  display: block;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  color: #294638;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.patient-list-page {
+  min-height: 100vh;
+  background: #F3F8F4;
+  display: flex;
+  flex-direction: column;
+}
+
+/* =====================================
+   HEADER
+===================================== */
+
+.page-header {
+  min-height: 85px;
+  background: #FFFFFF;
+  border-bottom: 1px solid #DCE7DE;
+  padding: 12px 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 10px rgba(49, 91, 70, 0.04);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand img {
+  width: 55px;
+  height: 55px;
+  object-fit: contain;
+}
+
+.brand h2 {
+  margin: 0;
+  font-family: 'Brush Script MT', cursive;
+  font-size: 30px;
+  color: #315B46;
+}
+
+.brand span {
+  display: block;
+  margin-top: 2px;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: #718477;
+}
+
+.back-button {
+  background: #E8F2EA;
+  color: #315B46;
+  border: 1px solid #DCE7DE;
+  border-radius: 7px;
+  padding: 11px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.back-button:hover {
+  background: #315B46;
+  color: #FFFFFF;
+}
+
+/* =====================================
+   MAIN CONTENT
+===================================== */
+
+.patient-content {
+  width: 90%;
+  max-width: 1450px;
+  margin: 0 auto;
+  padding: 40px 0 55px;
+  flex: 1;
+}
+
+/* =====================================
+   PAGE TITLE
+===================================== */
+
+.page-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  gap: 20px;
+}
+
+.page-label {
+  color: #527D68;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin: 0 0 9px;
+}
+
+.page-title h1 {
+  color: #315B46;
+  font-size: 28px;
+  font-weight: 650;
+  margin: 0 0 8px;
+}
+
+.page-title p:last-child {
+  color: #718477;
+  font-size: 13px;
+  margin: 0;
+}
+
+.patient-count {
+  background: #FFFFFF;
+  border: 1px solid #DCE7DE;
+  border-radius: 10px;
+  padding: 15px 25px;
+  min-width: 150px;
+  box-shadow: 0 3px 12px rgba(49, 91, 70, 0.05);
+}
+
+.patient-count span {
+  color: #718477;
+  font-size: 12px;
+}
+
+.patient-count h2 {
+  color: #315B46;
+  font-size: 25px;
+  margin: 5px 0 0;
+}
+
+/* =====================================
+   PATIENT TABLE SECTION
+===================================== */
+
+.patient-table-section {
+  background: #FFFFFF;
+  border: 1px solid #DCE7DE;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 3px 15px rgba(49, 91, 70, 0.06);
+}
+
+.table-heading {
+  margin-bottom: 23px;
+}
+
+.table-heading h2 {
+  color: #315B46;
+  font-size: 19px;
+  margin: 0 0 7px;
+}
+
+.table-heading p {
+  color: #718477;
+  font-size: 12px;
+  margin: 0;
+}
+
+/* =====================================
+   TABLE
+===================================== */
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.patient-table {
+  width: 100%;
+  border-collapse: collapse;
+  white-space: nowrap;
+}
+
+.patient-table thead {
+  background: #F3F8F4;
+}
+
+.patient-table th {
+  padding: 15px 13px;
+  text-align: left;
+  color: #527D68;
+  font-size: 12px;
+  font-weight: 650;
+  border-bottom: 1px solid #DCE7DE;
+}
+
+.patient-table td {
+  padding: 17px 13px;
+  font-size: 12px;
+  color: #526D5C;
+  border-bottom: 1px solid #E8F0E9;
+}
+
+.patient-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.patient-table tbody tr:hover {
+  background: #F8FBF8;
+}
+
+.patient-id {
+  color: #527D68 !important;
+  font-weight: 650;
+}
+
+.patient-name {
+  color: #294638 !important;
+  font-weight: 600;
+}
+
+/* =====================================
+   STATUS BADGES
+===================================== */
+
+.status-badge {
+  display: inline-block;
+  padding: 6px 11px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.new-status {
+  background: #FFF5DF;
+  color: #B4842F;
+}
+
+.viewed-status {
+  background: #E8F2EA;
+  color: #3F805B;
+}
+
+/* Patient Action Buttons */
+.action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+}
+
+.view-button,
+.edit-button,
+.delete-button {
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.view-button {
+  background: #E8F2EA;
+  color: #315B46;
+  border: 1px solid #DCE7DE;
+}
+
+.view-button:hover {
+  background: #DDEBE1;
+}
+
+.edit-button {
+  background: #EEF3F8;
+  color: #426783;
+  border: 1px solid #D5E1EA;
+}
+
+.edit-button:hover {
+  background: #DCE8F1;
+}
+
+.delete-button {
+  background: #FCEAEA;
+  color: #B94B4B;
+  border: 1px solid #F0D1D1;
+}
+
+.delete-button:hover {
+  background: #F5DADA;
+}
+
+/* =====================================
+   LOADING AND EMPTY STATES
+===================================== */
+
+.message-container {
+  text-align: center;
+  padding: 55px 20px;
+  color: #718477;
+  font-size: 14px;
+}
+
+.empty-icon {
+  width: 55px;
+  height: 55px;
+  background: #E8F2EA;
+  color: #527D68;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  margin: 0 auto 15px;
+}
+
+.message-container h3 {
+  color: #315B46;
+  font-size: 17px;
+  margin: 0 0 8px;
+}
+
+.message-container p {
+  margin: 0;
+  font-size: 13px;
+}
+
+.error-message {
+  color: #C75B5B;
+}
+
+.retry-button {
+  display: block;
+  margin: 15px auto 0;
+  padding: 9px 18px;
+  background: #E8F2EA;
+  color: #315B46;
+  border: 1px solid #DCE7DE;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* =====================================
+   FOOTER
+===================================== */
+
+.page-footer {
+  background: #FFFFFF;
+  border-top: 1px solid #DCE7DE;
+  padding: 18px 5%;
+  text-align: center;
+}
+
+.page-footer p {
+  margin: 0;
+  color: #718477;
+  font-size: 12px;
+}
+
+/* =====================================
+   RESPONSIVE DESIGN
+===================================== */
+
+@media (max-width: 768px) {
+
+  .patient-content {
+    width: 92%;
+    padding-top: 25px;
+  }
+
+  .page-title {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .patient-count {
+    width: 100%;
+  }
+
+  .patient-table-section {
+    padding: 15px;
+  }
+
+  .page-header {
+    padding: 12px 4%;
+    gap: 15px;
+  }
+
+  .brand img {
+    width: 43px;
+    height: 43px;
+  }
+
+  .brand h2 {
+    font-size: 25px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .back-button {
+    width: 100%;
+  }
+
+  .page-title h1 {
+    font-size: 24px;
+  }
+}
+
+/* Search and Filter Section */
+.filter-section {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr auto;
+  gap: 16px;
+  align-items: end;
+  padding: 22px 24px;
+  background: #f8fbf8;
+  border-bottom: 1px solid #dce7de;
+}
+
+.search-box,
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.search-box label,
+.filter-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #294638;
+}
+
+.search-box input,
+.filter-group select {
+  width: 100%;
+  height: 43px;
+  padding: 0 13px;
+  border: 1px solid #dce7de;
+  border-radius: 7px;
+  background: #ffffff;
+  color: #294638;
+  font-family: inherit;
+  font-size: 13px;
+  outline: none;
+}
+
+.search-box input:focus,
+.filter-group select:focus {
+  border-color: #527d68;
+  box-shadow: 0 0 0 3px rgba(82, 125, 104, 0.10);
+}
+
+.clear-filter-button {
+  height: 43px;
+  padding: 0 17px;
+  border: 1px solid #527d68;
+  border-radius: 7px;
+  background: #ffffff;
+  color: #315b46;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.clear-filter-button:hover {
+  background: #527d68;
+  color: #ffffff;
+}
+
+.filter-result-count {
+  padding: 14px 24px;
+  color: #718477;
+  font-size: 13px;
+}
+
+@media (max-width: 900px) {
+  .filter-section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .search-box {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 550px) {
+  .filter-section {
+    grid-template-columns: 1fr;
+  }
+
+  .search-box {
+    grid-column: auto;
+  }
+}

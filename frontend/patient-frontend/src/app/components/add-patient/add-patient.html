@@ -1,0 +1,250 @@
+
+<div class="patient-page">
+
+  <!-- Header -->
+  <header class="page-header">
+    <div class="brand">
+      <img src="images/gentle-care-logo.png" alt="Gentle Care Logo">
+      <div>
+        <h2>Gentle Care</h2>
+        <span>Patient Management System</span>
+      </div>
+    </div>
+
+    <button class="back-button" type="button" (click)="goBack()">
+      ← Back to Dashboard
+    </button>
+  </header>
+
+  <main class="page-content">
+
+    <!-- Page Heading -->
+    <div class="page-heading">
+      <p class="breadcrumb">Dashboard / Patient Management / Add Patient</p>
+      <h1>Add New Patient</h1>
+      <p>Enter the patient's information to create a new record.</p>
+    </div>
+
+    <!-- Registration Form -->
+    <form #patientForm="ngForm" (ngSubmit)="onSubmit()">
+        
+
+      <!-- Personal Information -->
+      <section class="form-card">
+
+        <div class="section-heading">
+          <div class="section-icon">♙</div>
+          <div>
+            <h2>Personal Information</h2>
+            <p>Basic details of the patient</p>
+          </div>
+        </div>
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label for="fullName">Full Name <span>*</span></label>
+            <input
+              type="text"
+              id="fullName"
+              name="fullName"
+              [(ngModel)]="patient.fullName"
+              placeholder="Enter patient's full name"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="dateOfBirth">Date of Birth <span>*</span></label>
+            <input
+              type="date"
+              id="dateOfBirth"
+              name="dateOfBirth"
+              [(ngModel)]="patient.dateOfBirth"
+              [max]="today"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="gender">Gender <span>*</span></label>
+            <select
+              id="gender"
+              name="gender"
+              [(ngModel)]="patient.gender"
+              required
+            >
+              <option value="">Select gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="bloodGroup">Blood Group</label>
+            <select
+              id="bloodGroup"
+              name="bloodGroup"
+              [(ngModel)]="patient.bloodGroup"
+            >
+              <option value="">Select blood group</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+            </select>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Contact Information -->
+      <section class="form-card">
+
+        <div class="section-heading">
+          <div class="section-icon">✉</div>
+          <div>
+            <h2>Contact Information</h2>
+            <p>Patient's contact and address details</p>
+          </div>
+        </div>
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label for="phone">Phone Number <span>*</span></label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              [(ngModel)]="patient.phone"
+              placeholder="+91 9876543210"
+              pattern="[+]?[0-9 ]{10,16}"
+              maxlength="14"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              [(ngModel)]="patient.email"
+              placeholder="example@gmail.com"
+              email
+              #emailField="ngModel"
+            >
+
+            <small
+              class="error-message"
+              *ngIf="emailField.invalid && emailField.touched"
+            >
+              Please enter a valid email address.
+            </small>
+          </div>
+
+          <div class="form-group">
+            <label for="city">City <span>*</span></label>
+            <input
+              type="text"
+              id="city"
+              name="city"
+              [(ngModel)]="patient.city"
+              placeholder="Enter city"
+              required
+            >
+          </div>
+
+          <div class="form-group full-width">
+            <label for="address">Full Address <span>*</span></label>
+            <textarea
+              id="address"
+              name="address"
+              [(ngModel)]="patient.address"
+              placeholder="Enter complete address"
+              rows="3"
+              required
+            ></textarea>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Medical Information -->
+      <section class="form-card">
+
+        <div class="section-heading">
+          <div class="section-icon">✚</div>
+          <div>
+            <h2>Medical Information</h2>
+            <p>Additional medical and emergency details</p>
+          </div>
+        </div>
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label for="emergencyContact">Emergency Contact Number</label>
+            <input
+              type="tel"
+              id="emergencyContact"
+              name="emergencyContact"
+              [(ngModel)]="patient.emergencyContact"
+              placeholder="+91 9876543210"
+              pattern="[+]?[0-9 ]{10,16}"
+              maxlength="14"
+            >
+          </div>
+
+          <div class="form-group full-width">
+            <label for="medicalHistory">Medical History / Notes</label>
+            <textarea
+              id="medicalHistory"
+              name="medicalHistory"
+              [(ngModel)]="patient.medicalHistory"
+              placeholder="Enter existing medical conditions, allergies or relevant notes"
+              rows="4"
+            ></textarea>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Form Actions -->
+      <div class="form-actions">
+
+        <button
+          type="button"
+          class="reset-button"
+          (click)="onReset()"
+        >
+          Clear Form
+        </button>
+
+        <button
+          type="submit"
+          class="submit-button"
+          [disabled]="patientForm.invalid || isLoading"
+        >
+          {{ isLoading ? 'Saving Patient...' : 'Save Patient' }}
+        </button>
+
+      </div>
+
+    </form>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="page-footer">
+    © 2026 Gentle Care. Patient Management System.
+  </footer>
+
+</div>
